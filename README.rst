@@ -32,6 +32,6 @@ To Contribute
 • Source code: https://github.com/MCLConsortium/jpl.mcl.site.knowledge
 • Contact us at mailto:edrn-ic@jpl.nasa.gov
 
-Copyright © 2016 California Institute of Technology. US Government sponsorship
-acknowledged. This software is licensed under the Apache License version 2.  See
-the docs/LICNSE.txt file for details.
+Copyright © 2016–2017 California Institute of Technology. US Government
+sponsorship acknowledged. This software is licensed under the Apache License
+version 2.  See the docs/LICNSE.txt file for details.
