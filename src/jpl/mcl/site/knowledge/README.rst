@@ -187,52 +187,7 @@ Works fine!
 Projects
 ========
 
-Let's try 
-An organ is a system of the body.  They're pretty much identical to degrees in
-that they have just titles and descriptions and go into organ folders::
-
-    >>> browser.open(portalURL)
-    >>> l = browser.getLink(id='jpl-mcl-site-knowledge-organfolder')
-    >>> l.url.endswith('++add++jpl.mcl.site.knowledge.organfolder')
-    True
-    >>> l.click()
-    >>> browser.getControl(name='form.widgets.title').value = u'My Organ Folder'
-    >>> browser.getControl(name='form.widgets.description').value = u'Some of my favorite organs.'
-    >>> browser.getControl(name='form.widgets.url').value = u'testscheme://localhost/rdf/organs'
-    >>> browser.getControl(name='form.widgets.ingestEnabled:list').value = True
-    >>> browser.getControl(name='form.buttons.save').click()
-    >>> 'my-organ-folder' in portal.keys()
-    True
-    >>> folder = portal['my-organ-folder']
-    >>> folder.title
-    u'My Organ Folder'
-    >>> folder.description
-    u'Some of my favorite organs.'
-    >>> folder.url
-    'testscheme://localhost/rdf/organs'
-    >>> folder.ingestEnabled
-    True
-
-Let's ingest and see what we get::
-
-    >>> registry['jpl.mcl.site.knowledge.interfaces.ISettings.objects'] = [u'my-degree-folder', u'my-organ-folder']
-    >>> transaction.commit()
-    >>> browser.open(portalURL + '/@@ingestContent')
-    >>> browser.contents
-    '...Ingest Complete...Objects Created (2)...Objects Updated (0)...Objects Deleted (0)...'
-    >>> len(folder.keys())
-    2
-    >>> keys = folder.keys()
-    >>> keys.sort()
-    >>> keys
-    ['anus', 'spleen']
-    >>> anus = folder['anus']
-    >>> anus.title
-    u'Anus'
-    >>> anus.description
-    u'The human anus is the external opening of the rectum.'
-
-Works fine!
+Let's try …
 
 
 Institutions
