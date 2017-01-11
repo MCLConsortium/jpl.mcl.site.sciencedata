@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+Copyright 2016 California Institute of Technology. ALL RIGHTS
+RESERVED. U.S. Government Sponsorship acknowledged.
+-->
+<configure xmlns='http://namespaces.zope.org/zope' xmlns:genericsetup='http://namespaces.zope.org/genericsetup'/>
