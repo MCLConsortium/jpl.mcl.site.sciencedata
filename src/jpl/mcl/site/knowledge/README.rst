@@ -86,11 +86,15 @@ And did it work?
     u'MPH'
     >>> mph.description
     u'Master Public Health'
+    >>> mph.subjectURI
+    u'http://mcl.jpl.nasa.gov/ksdb/degrees/2'
     >>> phd = folder['phd']
     >>> phd.title
     u'PhD'
     >>> phd.description
     u'Doctor of Philosophy'
+    >>> phd.subjectURI
+    u'http://mcl.jpl.nasa.gov/ksdb/degrees/1'
 
 Great!  Now let's see how we work in the face of alterations to data::
 
@@ -180,6 +184,65 @@ Let's ingest and see what we get::
     u'Anus'
     >>> anus.description
     u'The human anus is the external opening of the rectum.'
+
+Works fine!
+
+
+People
+======
+
+OK, let's try people::
+
+    >>> browser.open(portalURL)
+    >>> l = browser.getLink(id='jpl-mcl-site-knowledge-personfolder')
+    >>> l.url.endswith('++add++jpl.mcl.site.knowledge.personfolder')
+    True
+    >>> l.click()
+    >>> browser.getControl(name='form.widgets.title').value = u'My Person Folder'
+    >>> browser.getControl(name='form.widgets.description').value = u'Some of my favorite people.'
+    >>> browser.getControl(name='form.widgets.url').value = u'testscheme://localhost/rdf/person'
+    >>> browser.getControl(name='form.widgets.ingestEnabled:list').value = True
+    >>> browser.getControl(name='form.buttons.save').click()
+    >>> 'my-person-folder' in portal.keys()
+    True
+    >>> folder = portal['my-person-folder']
+    >>> folder.title
+    u'My Person Folder'
+    >>> folder.description
+    u'Some of my favorite people.'
+    >>> folder.url
+    'testscheme://localhost/rdf/person'
+    >>> folder.ingestEnabled
+    True
+
+Let's ingest and see what we get::
+
+    >>> registry['jpl.mcl.site.knowledge.interfaces.ISettings.objects'] = [u'my-degree-folder', u'my-organ-folder', u'my-person-folder']
+    >>> transaction.commit()
+    >>> browser.open(portalURL + '/@@ingestContent')
+    >>> browser.contents
+    '...Ingest Complete...Objects Created (2)...Objects Updated (0)...Objects Deleted (0)...'
+    >>> len(folder.keys())
+    2
+    >>> keys = folder.keys()
+    >>> keys.sort()
+    >>> keys
+    ['92346728-5e785b50', 'liu-beverley']
+    >>> liu = folder['liu-beverley']
+    >>> liu.title
+    u'Liu, Beverley'
+    >>> liu.givenName
+    u'Beverley'
+    >>> liu.surname
+    u'Liu'
+    >>> degrees = [i.title for i in liu.degrees]
+    >>> degrees.sort()
+    >>> degrees
+    [u'MD', u'MPH']
+    >>> liu.email
+    u'mailto:bl@mdanderson.org'
+    >>> liu.phone
+    u'+1 713 555 7856'
 
 Works fine!
 

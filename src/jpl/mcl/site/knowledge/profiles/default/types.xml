@@ -4,4 +4,6 @@
     <object name='jpl.mcl.site.knowledge.degreefolder' meta_type='Dexterity FTI'/>
     <object name='jpl.mcl.site.knowledge.organ' meta_type='Dexterity FTI'/>
     <object name='jpl.mcl.site.knowledge.organfolder' meta_type='Dexterity FTI'/>
+    <object name='jpl.mcl.site.knowledge.person' meta_type='Dexterity FTI'/>
+    <object name='jpl.mcl.site.knowledge.personfolder' meta_type='Dexterity FTI'/>
 </object>

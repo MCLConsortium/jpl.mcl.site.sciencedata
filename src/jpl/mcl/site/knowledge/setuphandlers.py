@@ -40,6 +40,15 @@ def createKnowledgeFolders(setupTool):
         description=u'Academic degrees are qualifications awarded on successful completion of courses of study.',
         url=_rdfBaseURL + u'degree', ingestEnabled=True
     )
+    createContentInContainer(
+        knowledge, 'jpl.mcl.site.knowledge.personfolder', title=u'People',
+        description=u'Individuals working with and comprising the consortium.',
+        url=_rdfBaseURL + u'person', ingestEnabled=True
+    )
     publish(knowledge)
     registry = getUtility(IRegistry)
-    registry['jpl.mcl.site.knowledge.interfaces.ISettings.objects'] = [u'knowledge/organs', u'knowledge/degrees']
+    registry['jpl.mcl.site.knowledge.interfaces.ISettings.objects'] = [
+        u'knowledge/organs',
+        u'knowledge/degrees',
+        u'knowledge/people'
+    ]

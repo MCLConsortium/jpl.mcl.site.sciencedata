@@ -33,6 +33,7 @@ _requirements = [
     'plone.app.registry',
     'plone.app.relationfield',
     'plone.behavior',
+    'plone.formwidget.contenttree',
     'Products.CMFPlacefulWorkflow',
     'Products.CMFPlone',
     'rdflib',
