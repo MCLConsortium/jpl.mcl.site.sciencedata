@@ -28,15 +28,15 @@ _entryPoints = {
 }
 _requirements = [
     'setuptools',
-    'Products.CMFPlone',
     'plone.api',
-    'Products.CMFPlacefulWorkflow',
     'plone.app.dexterity [grok, relations]',
-    'z3c.relationfield',
     'plone.app.registry',
     'plone.app.relationfield',
     'plone.behavior',
+    'Products.CMFPlacefulWorkflow',
+    'Products.CMFPlone',
     'rdflib',
+    'z3c.relationfield',
 ]
 _classifiers = [
     'Development Status :: 2 - Pre-Alpha',
