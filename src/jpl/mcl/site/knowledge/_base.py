@@ -58,6 +58,10 @@ class Ingestor(grok.Adapter):
         u'''Return the interface for objects that should be contained in the
         folder that this class adapts.'''
         raise NotImplementedError(u'Subclasses must implement getContainedObjectInterface')
+    def getTitles(self, predicates):
+        u'''Get the DC title from the given ``predicates``.  Subclasses may
+        override this.'''
+        return predicates.get(DC_TITLE)
     def _checkPredicates(self, predicates):
         u'''Check the given ``predicates`` to see if they make sense for the
         kinds of objects we'll be creating.  If not, raise an exception.  But
@@ -68,7 +72,7 @@ class Ingestor(grok.Adapter):
         predicateMap   = iface.getTaggedValue('predicateMap')            # Mapping RDF predicate to content's field name
         desiredTypeURI = rdflib.URIRef(iface.getTaggedValue('typeURI'))  # RDF type URI that we want
         typeURI        = predicates[rdflib.RDF.term('type')][0]          # RDF type URI that we're given
-        titles         = predicates.get(DC_TITLE)                        # Get the object's title
+        titles         = self.getTitles(predicates)                      # Get the object's title
         if typeURI != desiredTypeURI:                                    # Do we have the right RDF type?
             raise RDFTypeMismatchError(desiredTypeURI, typeURI)          # Nope, abort
         if not titles or not titles[0]:                                  # Do we have a title?
@@ -80,7 +84,8 @@ class Ingestor(grok.Adapter):
         We can indicate a problem with the named ``fti`` and can access fields
         by the given ``iface``.
         '''
-        fieldName = predicateMap[unicode(predicate)]
+        catalog = plone.api.portal.get_tool('portal_catalog')
+        fieldName, isRef = predicateMap[unicode(predicate)]
         if not values:
             _logger.info(
                 u'For type %s we want predicate %s but not given; leaving %s un-set',
@@ -89,12 +94,24 @@ class Ingestor(grok.Adapter):
             return
         field = iface.get(fieldName)                                     # Get the field out of the content interface
         fieldBinding = field.bind(obj)                                   # Bind that field to the content object
-        if schema.interfaces.ICollection.providedBy(field):              # Is it multi valued?
-            fieldBinding.validate(values)                                # Yes, validate all the values
-            fieldBinding.set(obj, values)                                # And set all the values
-        else:                                                            # No, it's not multi valued
-            fieldBinding.validate(values[0])                             # Validate just one value
-            fieldBinding.set(obj, values[0])                             # And set just one value
+        if isRef:                                                        # Is this a reference field?
+            items = [i.getObject() for i in catalog(subjectURI=values)]  # Find matching objects
+            if len(items) != len(values):                                # Find them all?
+                _logger.info(
+                    u'For type %s predicate %s linked to %d URIs, but only %d found',
+                    fti, predicate, len(values), len(items)
+                )
+            if schema.interfaces.ICollection.providedBy(field):          # Multi reference?
+                fieldBinding.set(obj, items)                             # Yes, set them all
+            elif len(items) > 0:                                         # Single reference and we have an item?
+                fieldBinding.set(obj, items[0])                          # Set single value
+        else:                                                            # It's a non-reference field
+            if schema.interfaces.ICollection.providedBy(field):          # Is it multi valued?
+                fieldBinding.validate(values)                            # Yes, validate all the values
+                fieldBinding.set(obj, values)                            # And set all the values
+            else:                                                        # No, it's not multi valued
+                fieldBinding.validate(values[0])                         # Validate just one value
+                fieldBinding.set(obj, values[0])                         # And set just one value
     def createObjects(self, context, uris, statements):
         u'''Create new objects in the ``context`` identified by ``uris`` and
         described in the ``statements``.  Return a sequence of those newly
@@ -119,7 +136,9 @@ class Ingestor(grok.Adapter):
                 predicate = rdflib.URIRef(predicate)                      # Convert from string to URIRef
                 if predicate == DC_TITLE:                                 # Is this the Dublin Core title?
                     continue                                              # We already set that, skip it
-                values = [unicode(i) for i in predicates.get(predicate)]  # Convert values from Literals to unicodes
+                values = predicates.get(predicate)                        # Get the values
+                if not values: continue                                   # Skip if empty
+                values = [unicode(i) for i in values]                     # Convert Literal+URIRefs to unicode
                 try:
                     self._setValue(obj, fti, iface, predicate, predicateMap, values)
                 except schema.ValidationError:
@@ -135,6 +154,7 @@ class Ingestor(grok.Adapter):
         find those objects, there's a lookup table ``brains`` that maps from
         subject URI to a portal catalog brain.  Subclasses may override this
         for special ingest needs.'''
+        catalog = plone.api.portal.get_tool('portal_catalog')
         updatedObjects = []                                                                  # Start w/no updated objs
         for uri in uris:                                                                     # For each subject URI
             brain = brains[uri]                                                              # Get matching brain
@@ -142,19 +162,28 @@ class Ingestor(grok.Adapter):
             predicates = statements[uri]                                                     # Subject-specific preds
             objectUpdated = False                                                            # Assume no update
             iface, fti, predicateMap, title = self._checkPredicates(predicates)              # Get usual suspects
-            for predicate, fieldName in predicateMap.iteritems():                            # For each pred+field name
+            for predicate, (fieldName, isRef) in predicateMap.iteritems():                   # For each pred+field name
                 field = iface.get(fieldName)                                                 # Get the field
                 fieldBinding = field.bind(obj)                                               # Bind it to the obj
-                currentValues = fieldBinding.get(obj)                                        # Get current values
-                newValues = [unicode(i) for i in predicates.get(rdflib.URIRef(predicate))]   # Literals to unicodes
-                if schema.interfaces.ICollection.providedBy(field):                          # Multi-valued field?
-                    if currentValues != newValues:                                           # Values different?
-                        self._setValue(obj, fti, iface, predicate, predicateMap, newValues)  # Yep, set new values
-                        objectUpdated = True                                                 # We updated the obj
-                else:                                                                        # Single-valued field
-                    if currentValues != newValues[0]:                                        # Value different?
-                        self._setValue(obj, fti, iface, predicate, predicateMap, newValues)  # Set thew new value
-                        objectUpdated = True                                                 # We updated the obj
+                newValues = predicates.get(rdflib.URIRef(predicate), [])                     # Get new values
+                newValues = [unicode(i) for i in newValues]                                  # Literals to unicodes
+                if isRef:                                                                    # Is this a reference?
+                    currentRefs = [i.subjectURI for i in fieldBinding.get(obj)]              # Get cur ref'd sub URIs
+                    currentRefs.sort()                                                       # Sort 'em
+                    newValues.sort()                                                         # Sort the new ones, too
+                    if currentRefs != newValues:                                             # Any change?
+                        self._setValue(obj, fti, iface, predicate, predicateMap, newValues)  # Yup, update    
+                        objectUpdated = True                                                 # We changed
+                else:                                                                        # Literal field
+                    currentValues = fieldBinding.get(obj)                                        # Get current values
+                    if schema.interfaces.ICollection.providedBy(field):                          # Multi-valued field?
+                        if currentValues != newValues:                                           # Values different?
+                            self._setValue(obj, fti, iface, predicate, predicateMap, newValues)  # Yep, set new values
+                            objectUpdated = True                                                 # We updated the obj
+                    else:                                                                        # Single-valued field
+                        if currentValues != newValues[0]:                                        # Value different?
+                            self._setValue(obj, fti, iface, predicate, predicateMap, newValues)  # Set thew new value
+                            objectUpdated = True                                                 # We updated the obj
             if objectUpdated:                                                                # Did we update the obj?
                 obj.reindexObject()                                                          # Yep, reindex it
                 updatedObjects.append(obj)                                                   # Add it to the list

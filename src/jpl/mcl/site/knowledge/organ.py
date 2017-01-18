@@ -22,8 +22,8 @@ class IOrgan(IKnowledgeObject):
 
 
 IOrgan.setTaggedValue('predicateMap', {
-    u'http://purl.org/dc/terms/title': 'title',
-    u'http://purl.org/dc/terms/description': 'description'
+    u'http://purl.org/dc/terms/title': ('title', False),
+    u'http://purl.org/dc/terms/description': ('description', False)
 })
 IOrgan.setTaggedValue('fti', 'jpl.mcl.site.knowledge.organ')
 IOrgan.setTaggedValue('typeURI', u'https://mcl.jpl.nasa.gov/rdf/types.rdf#Organ')
