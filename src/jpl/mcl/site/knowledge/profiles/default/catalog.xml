@@ -3,5 +3,9 @@
     <index name='subjectURI' meta_type='FieldIndex'>
         <indexed_attr value='subjectURI'/>
     </index>
+    <index name='phone' meta_type='FieldIndex'>
+        <indexed_attr value='phone'/>
+    </index>
     <column value='subjectURI'/>
+    <column value='phone'/>
 </object>

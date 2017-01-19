@@ -2,7 +2,7 @@
 
 u'''MCL — Person Folder'''
 
-from ._base import IIngestableFolder, Ingestor
+from ._base import IIngestableFolder, Ingestor, IngestableFolderView
 from .person import IPerson, FOAF_SURNAME, FOAF_GIVENNAME
 from five import grok
 from rdflib import URIRef
@@ -33,3 +33,8 @@ class PersonIngestor(Ingestor):
             return name                                                   # Great, use it
         else:                                                             # Nope?
             return None                                                   # Nope.
+
+
+class View(IngestableFolderView):
+    u'''View for an organ folder'''
+    grok.context(IPersonFolder)

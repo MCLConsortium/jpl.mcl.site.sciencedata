@@ -42,6 +42,20 @@ class IIngestableFolder(model.Schema):
     )
 
 
+class IngestableFolderView(grok.View):
+    grok.context(IIngestableFolder)
+    grok.require('zope2.View')
+    grok.baseclass()
+    def isManager(self):
+        context = aq_inner(self.context)
+        membership = plone.api.portal.get_tool('portal_membership')
+        return membership.checkPermission('Manage Portal', context)
+    def contents(self):
+        context = aq_inner(self.context)
+        catalog = plone.api.portal.get_tool('portal_catalog')
+        return catalog(path={'query': '/'.join(context.getPhysicalPath()), 'depth': 1}, sort_on='sortable_title')
+
+
 class IKnowledgeObject(model.Schema):
     u'''An abstract base class for content that are identified by RDF subject URIs.'''
     subjectURI = schema.URI(

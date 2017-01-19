@@ -2,7 +2,7 @@
 
 u'''MCL — Degree Folder'''
 
-from ._base import IIngestableFolder, Ingestor
+from ._base import IIngestableFolder, Ingestor, IngestableFolderView
 from .degree import IDegree
 from five import grok
 
@@ -16,3 +16,8 @@ class DegreeIngestor(Ingestor):
     grok.context(IDegreeFolder)
     def getContainedObjectInterface(self):
         return IDegree
+
+
+class View(IngestableFolderView):
+    u'''View for an degree folder'''
+    grok.context(IDegreeFolder)

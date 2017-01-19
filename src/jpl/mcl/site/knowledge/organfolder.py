@@ -2,7 +2,7 @@
 
 u'''MCL — Organ Folder'''
 
-from ._base import IIngestableFolder, Ingestor
+from ._base import IIngestableFolder, Ingestor, IngestableFolderView
 from .organ import IOrgan
 from five import grok
 
@@ -16,3 +16,8 @@ class OrganIngestor(Ingestor):
     grok.context(IOrganFolder)
     def getContainedObjectInterface(self):
         return IOrgan
+
+
+class View(IngestableFolderView):
+    u'''View for an organ folder'''
+    grok.context(IOrganFolder)
