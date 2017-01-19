@@ -154,7 +154,6 @@ class Ingestor(grok.Adapter):
         find those objects, there's a lookup table ``brains`` that maps from
         subject URI to a portal catalog brain.  Subclasses may override this
         for special ingest needs.'''
-        catalog = plone.api.portal.get_tool('portal_catalog')
         updatedObjects = []                                                                  # Start w/no updated objs
         for uri in uris:                                                                     # For each subject URI
             brain = brains[uri]                                                              # Get matching brain
@@ -172,7 +171,7 @@ class Ingestor(grok.Adapter):
                     currentRefs.sort()                                                       # Sort 'em
                     newValues.sort()                                                         # Sort the new ones, too
                     if currentRefs != newValues:                                             # Any change?
-                        self._setValue(obj, fti, iface, predicate, predicateMap, newValues)  # Yup, update    
+                        self._setValue(obj, fti, iface, predicate, predicateMap, newValues)  # Yup, update
                         objectUpdated = True                                                 # We changed
                 else:                                                                        # Literal field
                     currentValues = fieldBinding.get(obj)                                        # Get current values
