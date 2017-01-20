@@ -3,6 +3,12 @@ Changelog
 
 The following describes the changes between releases.
 
+0.0.1 — TBD
+-----------
+
+• Created types and RDF ingest for degrees, organs, and people
+• Create new types documentation
+
 
 0.0.0 — Unreleased
 ------------------

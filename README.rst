@@ -8,6 +8,7 @@ Features
 
 • RDF control panel
 • Degree content type
+• Organ content type
 • Person content type
 
 
