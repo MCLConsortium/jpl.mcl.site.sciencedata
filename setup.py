@@ -6,9 +6,9 @@ import os.path
 # Package data
 # ------------
 
-_name            = 'jpl.mcl.site.knowledge'
+_name            = 'jpl.mcl.site.sciencedata'
 _version         = '0.0.1'
-_description     = 'Knowledge representation for the MCL site'
+_description     = 'Science data for the MCL site'
 _url             = 'https://github.com/MCLConsortium/' + _name
 _downloadURL     = 'https://github.com/MCLConsortium/' + _name + '/archive/' + _version + '.zip'
 _author          = 'Sean Kelly'
@@ -18,8 +18,8 @@ _maintainerEmail = 'sean.kelly@jpl.nasa.gov'
 _license         = 'Proprietary'
 _namespaces      = ['jpl', 'jpl.mcl', 'jpl.mcl.site']
 _zipSafe         = False
-_keywords        = 'plone zope knowledge mcl'
-_testSuite       = 'jpl.mcl.site.knowledge.tests.test_suite'
+_keywords        = 'plone zope science data mcl'
+_testSuite       = 'jpl.mcl.site.sciencedata.tests.test_suite'
 _extras = {
     'test': ['plone.app.testing'],
 }

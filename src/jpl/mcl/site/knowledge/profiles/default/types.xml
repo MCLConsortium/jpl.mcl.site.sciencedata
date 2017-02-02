@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?> 
-<object name='portal_types' meta_type='Plone Types Tool'>
-    <object name='jpl.mcl.site.knowledge.degree' meta_type='Dexterity FTI'/>
-    <object name='jpl.mcl.site.knowledge.degreefolder' meta_type='Dexterity FTI'/>
-    <object name='jpl.mcl.site.knowledge.organ' meta_type='Dexterity FTI'/>
-    <object name='jpl.mcl.site.knowledge.organfolder' meta_type='Dexterity FTI'/>
-    <object name='jpl.mcl.site.knowledge.person' meta_type='Dexterity FTI'/>
-    <object name='jpl.mcl.site.knowledge.personfolder' meta_type='Dexterity FTI'/>
-</object>
