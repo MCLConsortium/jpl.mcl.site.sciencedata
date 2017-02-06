@@ -10,7 +10,8 @@ class TestSchemeHandler(urllib2.BaseHandler):
     def testscheme_open(self, req):
         try:
             selector = req.get_selector()
-            path = 'tests/data/' + selector.split('/')[-1] + '.rdf'
+            path = 'tests/data/' + selector.split('/')[-1] + '.json'
+
             if pkg_resources.resource_exists(PACKAGE_NAME, path):
                 return urllib.addinfourl(
                     pkg_resources.resource_stream(PACKAGE_NAME, path),

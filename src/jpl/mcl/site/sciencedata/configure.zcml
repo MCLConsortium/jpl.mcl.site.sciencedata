@@ -24,7 +24,7 @@ RESERVED. U.S. Government Sponsorship acsciencedatad.
         name='default'
         title='MCL Site Science Data'
         directory='profiles/default'
-        description='MCL sciencedata content types and RDF ingestion'
+        description='MCL sciencedata content types and RDF/JSON ingestion'
         provides='Products.GenericSetup.interfaces.EXTENSION'
     />
     <genericsetup:importStep

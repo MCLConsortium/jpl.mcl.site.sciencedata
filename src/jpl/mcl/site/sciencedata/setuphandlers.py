@@ -14,10 +14,10 @@ _logger = logging.getLogger(__name__)
 
 # There has to be a better way of doing this:
 if socket.gethostname() == 'tumor.jpl.nasa.gov' or socket.gethostname().endswith('.local'):
-    _logger.warn(u'Using development KSDB on edrn-dev.jpl.nasa.gov instead of production')
-    _rdfBaseURL = u'https://edrn-dev.jpl.nasa.gov/ksdb/publishrdf/?rdftype='
+    _logger.warn(u'Using development solr on labcas-dev instead of labcas production')
+    _solrBaseURL = u'http://localhost:8983/solr/'
 else:
-    _rdfBaseURL = u'https://mcl.jpl.nasa.gov/ksdb/publishrdf/?rdftype='
+    _solrBaseURL = u'https://labcas/solr/'
 
 
 def createScienceDataFolders(setupTool):
@@ -33,10 +33,10 @@ def createScienceDataFolders(setupTool):
     createContentInContainer(
         sciencedata, 'jpl.mcl.site.sciencedata.labcascollectionfolder', title=u'Labcas Collections',
         description=u'Labcas collections sourced from labcas.',
-        url=_rdfBaseURL + u'labcascollection', ingestEnabled=True
+        url=_solrBaseURL + u'collections', ingestEnabled=True
     )
     publish(sciencedata)
     registry = getUtility(IRegistry)
     registry['jpl.mcl.site.sciencedata.interfaces.ISettings.objects'] = [
-        u'sciencedata/labcascollection'
+        u'science-data/labcas-collections'
     ]
