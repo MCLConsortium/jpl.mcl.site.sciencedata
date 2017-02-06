@@ -13,7 +13,7 @@ var
 sdist
 develop-eggs
 .*.cfg
-.idea
+.idea/
 
 # Installer logs
 pip-log.txt

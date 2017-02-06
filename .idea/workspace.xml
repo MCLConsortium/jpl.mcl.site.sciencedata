@@ -1,19 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="59cdb07b-01b2-487b-8b28-0bb23404d4d6" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/labcascollection_templates/view.pt" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/buildout.cfg" afterPath="$PROJECT_DIR$/buildout.cfg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/setup.py" afterPath="$PROJECT_DIR$/setup.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/README.rst" afterPath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/README.rst" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/_base.py" afterPath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/_base.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/configure.zcml" afterPath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/configure.zcml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/labcascollection.py" afterPath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/labcascollection.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/setuphandlers.py" afterPath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/setuphandlers.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/testing.py" afterPath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/testing.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/tests/data/labcas.json" afterPath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/tests/data/labcas.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/tests/test_setup.py" afterPath="$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/tests/test_setup.py" />
-    </list>
+    <list default="true" id="59cdb07b-01b2-487b-8b28-0bb23404d4d6" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,31 +15,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="README.rst" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/README.rst">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="975">
-              <caret line="65" column="0" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="labcas2.json" pinned="false" current-in-tab="false">
+      <file leaf-file-name="labcas2.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/tests/data/labcas2.json">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="1031" lean-forward="true" selection-start-line="0" selection-start-column="1031" selection-end-line="0" selection-end-column="1031" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="labcas3.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/tests/data/labcas3.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="748" lean-forward="false" selection-start-line="0" selection-start-column="748" selection-end-line="0" selection-end-column="748" />
               <folding />
             </state>
           </provider>
@@ -179,8 +147,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-22" />
-    <option name="y" value="23" />
+    <option name="x" value="116" />
+    <option name="y" value="24" />
     <option name="width" value="1414" />
     <option name="height" value="804" />
   </component>
@@ -610,10 +578,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-22" y="23" width="1414" height="804" extended-state="0" />
-    <editor active="true" />
+    <frame x="116" y="24" width="1414" height="804" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2496464" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2496464" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3292517" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -738,14 +706,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/tests/data/labcas2.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="1031" lean-forward="true" selection-start-line="0" selection-start-column="1031" selection-end-line="0" selection-end-column="1031" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/tests/test_functional.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -814,6 +774,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="975">
           <caret line="65" column="0" lean-forward="true" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jpl/mcl/site/sciencedata/tests/data/labcas2.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="1031" lean-forward="true" selection-start-line="0" selection-start-column="1031" selection-end-line="0" selection-end-column="1031" />
           <folding />
         </state>
       </provider>
