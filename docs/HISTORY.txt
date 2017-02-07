@@ -3,6 +3,11 @@ Changelog
 
 The following describes the changes between releases.
 
+0.0.2 — TBD
+-----------
+
+• Added text to describe labcas collection data
+
 0.0.1 — TBD
 -----------
 
