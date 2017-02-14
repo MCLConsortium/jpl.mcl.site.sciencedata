@@ -25,18 +25,19 @@ def createScienceDataFolders(setupTool):
     portal = setupTool.getSite()
     # Don't bother if we're running in the test fixture
     if hasattr(portal._p_jar, 'db') and isinstance(portal._p_jar.db().storage, DemoStorage): return
-    if 'sciencedata' in portal.keys(): return
+    if 'science-data' in portal.keys(): return
     sciencedata = createContentInContainer(
         portal, 'Folder', title=u'Science Data',
-        description=u"MCL's Science Data Environment"
+        description=u"MCL's Science Data Environment",
+        url=_solrBaseURL + u'collections', ingestEnabled=True
     )
     createContentInContainer(
-        sciencedata, 'jpl.mcl.site.sciencedata.labcascollectionfolder', title=u'Labcas Collections',
-        description=u'Labcas collections sourced from labcas.',
+        sciencedata, 'jpl.mcl.site.sciencedata.labcascollectionfolder', title=u'All Collections',
+        description=u'All Collections.',
         url=_solrBaseURL + u'collections', ingestEnabled=True
     )
     publish(sciencedata)
     registry = getUtility(IRegistry)
     registry['jpl.mcl.site.sciencedata.interfaces.ISettings.objects'] = [
-        u'science-data/labcas-collections'
+        u'science-data/all-collections'
     ]

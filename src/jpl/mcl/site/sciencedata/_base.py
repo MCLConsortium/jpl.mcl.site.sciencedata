@@ -102,8 +102,6 @@ class Ingestor(grok.Adapter):
         '''
         catalog = plone.api.portal.get_tool('portal_catalog')
         fieldName, isRef = predicateMap[unicode(predicate)]
-        print "VALUES"
-        print values
         if not values:
             _logger.info(
                 u'For type %s we want predicate %s but not given; leaving %s un-set',
@@ -115,8 +113,6 @@ class Ingestor(grok.Adapter):
         fieldBinding = field.bind(obj)                                   # Bind that field to the content object
         if isRef:                                                        # Is this a reference field?
             items = [i.getObject() for i in catalog(subjectURI=values)]  # Find matching objects
-            print "items"
-            print items
             if len(items) != len(values):                                # Find them all?
                 _logger.info(
                     u'For type %s predicate %s linked to %d URIs, but only %d found',
@@ -156,7 +152,6 @@ class Ingestor(grok.Adapter):
             obj = createContentInContainer(context, fti, title=title, subjectURI=unicode(uri))
             # Now set its fields
             for predicate in predicateMap:
-                print "setvalue"
                 values = predicates.get(predicate)                        # Get the values
                 if not values: continue                                   # Skip if empty
                 if isinstance(values, basestring):
@@ -231,9 +226,6 @@ class Ingestor(grok.Adapter):
             uri = i['subjectURI'].decode('utf-8')
             existingBrains[rdflib.URIRef(uri)] = i
 
-        print "RESULTS"
-        print statements
-        print
         existingURIs   = set(existingBrains.keys())     # Set of currently existing URIs in the context
         statementURIs  = set(statements.keys())         # Set of URIs in the newly read RDF
         newURIs        = statementURIs - existingURIs   # Set of URIs for brand new objects
