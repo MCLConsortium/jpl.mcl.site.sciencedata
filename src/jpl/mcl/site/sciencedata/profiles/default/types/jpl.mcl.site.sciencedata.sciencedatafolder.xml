@@ -3,18 +3,18 @@
 Copyright 2016 California Institute of Technology. ALL RIGHTS
 RESERVED. U.S. Government Sponsorship acsciencedatad.
 -->
-<object name='jpl.mcl.site.sciencedata.labcascollectionfolder' meta_type='Dexterity FTI' i18n:domain='jpl.mcl.site.sciencedata'
+<object name='jpl.mcl.site.sciencedata.sciencedatafolder' meta_type='Dexterity FTI' i18n:domain='jpl.mcl.site.sciencedata'
     xmlns:i18n='http://xml.zope.org/namespaces/i18n'>
-    <property name='title' i18n:translate=''>Labcas Collection Folder</property>
+    <property name='title' i18n:translate=''>Science Data Collection Folder</property>
     <property name='description' i18n:translate=''>A container for academic ranks</property>
-    <property name='content_icon'>++resource++jpl.mcl.site.sciencedata/labcascollectionfolder.png</property>
+    <property name='content_icon'>++resource++jpl.mcl.site.sciencedata/sciencedatafolder.png</property>
     <property name='allow_discussion'>False</property>
     <property name='global_allow'>True</property>
     <property name='filter_content_types'>True</property>
     <property name='allowed_content_types'>
-        <element value='jpl.mcl.site.sciencedata.labcascollection'/>
+        <element value='jpl.mcl.site.sciencedata.sciencedata'/>
     </property>
-    <property name='schema'>jpl.mcl.site.sciencedata.labcascollectionfolder.ILabcascollectionFolder</property>
+    <property name='schema'>jpl.mcl.site.sciencedata.sciencedatafolder.ISciencedataFolder</property>
     <property name='klass'>plone.dexterity.content.Container</property>
     <property name='add_permission'>cmf.AddPortalContent</property>
     <property name='behaviors'>

@@ -16,8 +16,10 @@ _logger = logging.getLogger(__name__)
 if socket.gethostname() == 'tumor.jpl.nasa.gov' or socket.gethostname().endswith('.local'):
     _logger.warn(u'Using development solr on labcas-dev instead of labcas production')
     _solrBaseURL = u'http://localhost:8983/solr/'
+    _labcasBaseURL = u'https://labcas-dev.jpl.nasa.gov/ui/c/'
 else:
     _solrBaseURL = u'https://labcas/solr/'
+    _labcasBaseURL = u'https://labcas.jpl.nasa.gov/ui/c/'
 
 
 def createScienceDataFolders(setupTool):
@@ -25,19 +27,15 @@ def createScienceDataFolders(setupTool):
     portal = setupTool.getSite()
     # Don't bother if we're running in the test fixture
     if hasattr(portal._p_jar, 'db') and isinstance(portal._p_jar.db().storage, DemoStorage): return
-    if 'science-data' in portal.keys(): return
+    if 'science-data' in portal.keys():
+        portal.manage_delObjects('science-data')
     sciencedata = createContentInContainer(
-        portal, 'Folder', title=u'Science Data',
+        portal, 'jpl.mcl.site.sciencedata.sciencedatafolder', title=u'Science Data',
         description=u"MCL's Science Data Environment",
-        url=_solrBaseURL + u'collections', ingestEnabled=True
-    )
-    createContentInContainer(
-        sciencedata, 'jpl.mcl.site.sciencedata.labcascollectionfolder', title=u'All Collections',
-        description=u'All Collections.',
-        url=_solrBaseURL + u'collections', ingestEnabled=True
+        labcasurl=_solrBaseURL + u'collections', labcas_sourceurl_prefix=_labcasBaseURL , ingestEnabled=True
     )
     publish(sciencedata)
     registry = getUtility(IRegistry)
     registry['jpl.mcl.site.sciencedata.interfaces.ISettings.objects'] = [
-        u'science-data/all-collections'
+        u'science-data'
     ]

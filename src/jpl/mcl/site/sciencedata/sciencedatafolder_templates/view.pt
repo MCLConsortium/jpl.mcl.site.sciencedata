@@ -13,10 +13,10 @@
             <metal:content-core define-macro='content-core' tal:define='isManager view/isManager'>
                 <p tal:condition='isManager' class='discreet callout'>
                     <label for='form-widgets-url' class='horizontal' i18n:translate='rdfURL'>
-                        RDF URL:
+                        Source URL(s):
                     </label>
                     <span id='form-widgets-url' class='uri-widget uri-field'>
-                        <a href='#' tal:attributes='href context/url' tal:content='context/url'>
+                        <a href='#' tal:attributes='href context/labcasurl' tal:content='context/labcasurl'>
                             http://somewhere.com/some/rdf/source
                         </a>
                     </span>
@@ -57,7 +57,7 @@
                         <tal:repeat repeat='row view/contents'>
                             <tr class='odd' tal:define='odd repeat/row/odd;
                                     collection  row/getObject;
-                                    url row/getURL;
+                                    url collection/sourceurl;
                                     description collection/description;
                                     title collection/Title;
                                     leadpi collection/leadpi;

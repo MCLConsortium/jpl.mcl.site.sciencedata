@@ -23,19 +23,20 @@ Here we go.
 Labcas Collections
 =======
 
-A labcascollection is an academic rank conferred by a college or university after
+A sciencedata is an academic rank conferred by a college or university after
 examination or after completion of a course of study, or conferred as an honor
 on a distinguished person.  They go in Labcas Collection Folders, which can be added
 anywhere:
 
     >>> browser.open(portalURL)
-    >>> l = browser.getLink(id='jpl-mcl-site-sciencedata-labcascollectionfolder')
-    >>> l.url.endswith('++add++jpl.mcl.site.sciencedata.labcascollectionfolder')
+    >>> l = browser.getLink(id='jpl-mcl-site-sciencedata-sciencedatafolder')
+    >>> l.url.endswith('++add++jpl.mcl.site.sciencedata.sciencedatafolder')
     True
     >>> l.click()
     >>> browser.getControl(name='form.widgets.title').value = u'My Labcas Collection Folder'
-    >>> browser.getControl(name='form.widgets.description').value = u'Some of my favorite labcascollections.'
-    >>> browser.getControl(name='form.widgets.url').value = u'testscheme://localhost/rdf/labcas'
+    >>> browser.getControl(name='form.widgets.description').value = u'Some of my favorite sciencedatas.'
+    >>> browser.getControl(name='form.widgets.labcasurl').value = u'testscheme://localhost/rdf/labcas'
+    >>> browser.getControl(name='form.widgets.labcas_sourceurl_prefix').value = u'testscheme://localhost/ui/labcas'
     >>> browser.getControl(name='form.widgets.ingestEnabled:list').value = False
     >>> browser.getControl(name='form.buttons.save').click()
     >>> 'my-labcas-collection-folder' in portal.keys()
@@ -59,7 +60,7 @@ visiting a view at the root of the site::
     >>> transaction.commit()
     >>> browser.open(portalURL + '/@@ingestContent')
 
-But since the labcascollection folder had ingest disabled, it's still empty::
+But since the sciencedata folder had ingest disabled, it's still empty::
 
     >>> len(folder.keys())
     0

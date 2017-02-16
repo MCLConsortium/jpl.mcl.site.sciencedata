@@ -31,9 +31,14 @@ class IIngestableFolder(model.Schema):
         description=_(u'A brief description of this folder.'),
         required=False
     )
-    url = schema.URI(
-        title=_(u'RDF URL'),
-        description=_(u'Uniform Resource Locator to the Resource Description Framework source of science data.'),
+    labcasurl = schema.URI(
+        title=_(u'Labcas Solr URL'),
+        description=_(u'Uniform Resource Locator to the Solr source of labcas data.'),
+        required=True
+    )
+    labcas_sourceurl_prefix = schema.URI(
+        title=_(u'Labcas URL Prefix'),
+        description=_(u'Uniform Resource Locator prefix to the full url of the Labcas data page.'),
         required=True
     )
     ingestEnabled = schema.Bool(
@@ -214,7 +219,7 @@ class Ingestor(grok.Adapter):
         context = aq_inner(self.context)                                                     # Get our container
         if not context.ingestEnabled: raise IngestDisabled(context)                          # Do we ingest?
         catalog = plone.api.portal.get_tool('portal_catalog')                                # Get the catalog
-        statements = self._readSolr(context.url)                                       # Read the RDF
+        statements = self._readLabcasSolr(context.labcasurl, context.labcas_sourceurl_prefix)                                       # Read the RDF
         # Find out what we currently contain
         results = catalog(
             object_provides=IScienceDataObject.__identifier__,
@@ -236,17 +241,18 @@ class Ingestor(grok.Adapter):
         updatedObjects = self.updateObjects(context, updateURIs, existingBrains, statements)
         context.manage_delObjects([existingBrains[i]['id'].decode('utf-8') for i in deadURIs])
         return IngestResults(newObjects, updatedObjects, deadURIs)
-    def _readSolr(self, url):
+    def _readLabcasSolr(self, labcasurl, labcas_sourceurl_prefix):
         u'''Read the statements made at the RDF at ``url`` and return a
         dictionary of {s → [{p → [o]}]} where ``s`` is a subject URI mapping
         to a sequence of dictionaries whose keys ``p`` are predicate URIs
         mapping to a sequence of ``o`` objects, which may be literal values
         or reference URIs.'''
-        solr_conn = Solr(base_url=url, version=4)
+        solr_conn = Solr(base_url=labcasurl, version=4)
         solr_query = {'q': '*:*'}
         solr_response = solr_conn.search(**solr_query)
         results = {}
         for obj in solr_response.documents:
+            obj['sourceurl'] = labcas_sourceurl_prefix + obj.get("id")
             results[obj.get("id")] = obj
 
         return results
