@@ -58,7 +58,7 @@ visiting a view at the root of the site::
     >>> registry['jpl.mcl.site.sciencedata.interfaces.ISettings.objects'] = [u'my-labcas-collection-folder']
     >>> import transaction
     >>> transaction.commit()
-    >>> browser.open(portalURL + '/@@ingestContent')
+    >>> browser.open(portalURL + '/@@ingestScienceData')
 
 But since the sciencedata folder had ingest disabled, it's still empty::
 

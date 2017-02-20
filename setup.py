@@ -38,7 +38,8 @@ _requirements = [
     'Products.CMFPlone',
     'rdflib',
     'z3c.relationfield',
-    'mysolr'
+    'mysolr',
+    'eea.facetednavigation'
 ]
 _classifiers = [
     'Development Status :: 2 - Pre-Alpha',
