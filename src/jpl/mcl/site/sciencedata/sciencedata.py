@@ -5,6 +5,12 @@ u'''MCL — Sciencedata'''
 from . import MESSAGE_FACTORY as _
 from zope import schema
 from ._base import IScienceDataObject
+from plone.formwidget.contenttree import ObjPathSourceBinder
+from z3c.relationfield.schema import RelationChoice, RelationList
+from jpl.mcl.site.knowledge.protocol import IProtocol
+from jpl.mcl.site.knowledge.person import IPerson
+from jpl.mcl.site.knowledge.organ import IOrgan
+from jpl.mcl.site.knowledge.institution import IInstitution
 
 
 class ISciencedata(IScienceDataObject):
@@ -29,26 +35,56 @@ class ISciencedata(IScienceDataObject):
         description=_(u'The url of this science data collection.'),
         required=True,
     )
-    leadpi = schema.TextLine(
-        title=_(u'Lead PI'),
-        description=_(u'The Lead PI associated with this science data collection.'),
-        required=True,
+    leadpi = RelationList(
+        title=_(u'Lead PI(s)'),
+        description=_(u'Lead PI(s) associated with this data collection.'),
+        required=False,
+        default=[],
+        value_type=RelationChoice(
+            title=_(u'Lead PI'),
+            description=_(u'A individual lead pi in this data collection.'),
+            source=ObjPathSourceBinder(object_provides=IPerson.__identifier__)
+        )
     )
-    organ = schema.TextLine(
-        title=_(u'Organ'),
-        description=_(u'The organ associated with this science data collection.'),
-        required=True,
+    organ = RelationList(
+        title=_(u'Organs'),
+        description=_(u'Organs associated with this data collection.'),
+        required=False,
+        default=[],
+        value_type=RelationChoice(
+            title=_(u'Organ'),
+            description=_(u'A individual organ associated with this data collection.'),
+            source=ObjPathSourceBinder(object_provides=IOrgan.__identifier__)
+        )
     )
     discipline = schema.TextLine(
         title=_(u'Discipline'),
         description=_(u'The discipline of this science data collection.'),
         required=True,
     )
-    protocol = schema.TextLine(
-        title=_(u'Protocol'),
-        description=_(u'The protocol of this science data collection.'),
-        required=True,
+    institution = RelationList(
+        title=_(u'Institutions'),
+        description=_(u'Institutions associated with this data collection.'),
+        required=False,
+        default=[],
+        value_type=RelationChoice(
+            title=_(u'Institution'),
+            description=_(u'A individual institution in this data collection.'),
+            source=ObjPathSourceBinder(object_provides=IInstitution.__identifier__)
+        )
     )
+    protocol = RelationList(
+        title=_(u'Protocols'),
+        description=_(u'Protocols associated with this data collection.'),
+        required=False,
+        default=[],
+        value_type=RelationChoice(
+            title=_(u'Protocol'),
+            description=_(u'A individual protocol in this data collection.'),
+            source=ObjPathSourceBinder(object_provides=IProtocol.__identifier__)
+        )
+    )
+
     qastate = schema.TextLine(
         title=_(u'QA Status'),
         description=_(u'The QA status of this science data collection.'),
@@ -61,16 +97,17 @@ class ISciencedata(IScienceDataObject):
     )
 
 ISciencedata.setTaggedValue('predicateMap', {
-    u'CollectionName': ('title', False),
-    u'CollectionDescription': ('description', False),
-    u'id': ('collectionid', False),
-    u'LeadPI': ('leadpi', False),
-    u'OrganSite': ('organ', False),
-    u'Discipline': ('discipline', False),
-    u'ProtocolId': ('protocol', False),
-    u'QAState': ('qastate', False),
-    u'Species': ('species', False),
-    u'sourceurl': ('sourceurl', False)
+    u'CollectionName': ('title', False, ''),
+    u'CollectionDescription': ('description', False, ''),
+    u'id': ('collectionid', False, ''),
+    u'LeadPIId': ('leadpi', True, 'https://mcl.jpl.nasa.gov/ksdb/personinput/?id='),
+    u'InstitutionId': ('institution', True, 'https://mcl.jpl.nasa.gov/ksdb/institutioninput/?id='),
+    u'OrganId': ('organ', True, 'https://mcl.jpl.nasa.gov/ksdb/organinput/?id='),
+    u'Discipline': ('discipline', False, ''),
+    u'ProtocolId': ('protocol', True, 'https://mcl.jpl.nasa.gov/ksdb/protocolinput/?id='),
+    u'QAState': ('qastate', False, ''),
+    u'Species': ('species', False, ''),
+    u'sourceurl': ('sourceurl', False, '')
 })
 ISciencedata.setTaggedValue('fti', 'jpl.mcl.site.sciencedata.sciencedata')
 ISciencedata.setTaggedValue('typeValue', u'MCL')

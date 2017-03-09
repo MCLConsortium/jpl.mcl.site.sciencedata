@@ -7,6 +7,11 @@
     metal:use-macro='context/main_template/macros/master'>
     <head>
         <title>Degree Folder View</title>
+        <metal:block fill-slot='style_slot' tal:define='navroot context/@@plone_portal_state/navigation_root_url'>
+            <link rel='stylesheet' type='text/css'
+                tal:attributes='href string:${navroot}/++resource++jpl.mcl.site.knowledge/custom-mcl.css'
+            />
+        </metal:block>
     </head>
     <body>
         <metal:content-core fill-slot='content-core'>
@@ -46,6 +51,7 @@
                             <th i18n:translate='scienceFolder_titleHeading'>Collection Name</th>
                             <th i18n:translate='scienceFolder_descriptionHeading'>Description</th>
                             <th i18n:translate='scienceFolder_leadpiHeading'>Lead PI</th>
+                            <th i18n:translate='scienceFolder_institutionHeading'>Institution</th>
                             <th i18n:translate='scienceFolder_organHeading'>Organ</th>
                             <th i18n:translate='scienceFolder_disciplineHeading'>Discipline</th>
                             <th i18n:translate='scienceFolder_protocolHeading'>Protocol</th>
@@ -55,7 +61,7 @@
                     </thead>
                     <tbody>
                         <tal:repeat repeat='row view/contents'>
-                            <tr class='odd' tal:define='odd repeat/row/odd;
+                            <tr class='odd' tal:define="odd repeat/row/odd;
                                     collection  row/getObject;
                                     url collection/sourceurl;
                                     description collection/description;
@@ -66,9 +72,13 @@
                                     protocol collection/protocol;
                                     qastate collection/qastate;
                                     species collection/species;
-                                '
-                                tal:attributes='class python:u"odd" if odd else u"even"'>
+                                    institution collection/institution;
+                                    isPublic python:qastate=='Public';
+                                "
+                                tal:attributes='class python:u"odd" if odd else u"even"'
+                                tal:condition="isPublic">
                                 <td>
+                                NEWWW
                                     <a href='#' tal:attributes='href url' tal:content='row/Title'>
                                         Title
                                     </a>
@@ -77,25 +87,35 @@
                                     Lorem ipsum etc.
                                 </td>
                                 <td>
-                                    <a href='#' tal:condition='python:leadpi'
-                                        tal:content='leadpi'>
-                                        Alpha Zork
+                                    <tal:repeat repeat='pi leadpi'>
+                                    <a href='#' tal:content='python:pi.givenName+" "+pi.surname' tal:attributes='href python:"/mcl/resources/people/"+pi.absolute_url_path()'>
+                                        blublablurp pi
                                     </a>
+                                    </tal:repeat>
                                 </td>
                                 <td>
-                                    <a href='#' tal:condition='python:organ'
-                                        tal:content='organ'>
-                                        glow in the dark intestines
+                                    <tal:repeat repeat='inst institution'>
+                                    <a href='#' tal:content='inst/title' tal:attributes='href python:"/mcl/resources/institutions/"+inst.absolute_url_path()'>
+                                        blublablurp institution
                                     </a>
+                                    </tal:repeat>
+                                </td>
+                                <td>
+                                    <tal:repeat repeat='org organ'>
+                                    <a href='#' tal:content='org/title' tal:attributes='href python:"/mcl/resources/organs/"+org.absolute_url_path()'>
+                                        blublablurp org
+                                    </a>
+                                    </tal:repeat>
                                 </td>
                                 <td tal:content='discipline'>
                                     disciplines surrounding this collection
                                 </td>
                                 <td>
-                                    <a href='#' tal:condition='python:protocol'
-                                        tal:content='protocol'>
+                                    <tal:repeat repeat='prot protocol'>
+                                    <a href='#' tal:content='prot/title' tal:attributes='href python:"/mcl/resources/protocols/"+prot.absolute_url_path()'>
                                         blublablurp protocol
                                     </a>
+                                    </tal:repeat>
                                 </td>
                                 <td tal:content='species'>
                                     Alien

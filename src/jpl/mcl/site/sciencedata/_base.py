@@ -106,7 +106,7 @@ class Ingestor(grok.Adapter):
         by the given ``iface``.
         '''
         catalog = plone.api.portal.get_tool('portal_catalog')
-        fieldName, isRef = predicateMap[unicode(predicate)]
+        fieldName, isRef, urlprefix = predicateMap[unicode(predicate)]
         if not values:
             _logger.info(
                 u'For type %s we want predicate %s but not given; leaving %s un-set',
@@ -116,8 +116,12 @@ class Ingestor(grok.Adapter):
         field = iface.get(fieldName)                                     # Get the field out of the content interface
 
         fieldBinding = field.bind(obj)                                   # Bind that field to the content object
+        print "fieldname"
+        print fieldName
+        print "value"
+        print values
         if isRef:                                                        # Is this a reference field?
-            items = [i.getObject() for i in catalog(subjectURI=values)]  # Find matching objects
+            items = [i.getObject() for i in catalog(subjectURI=[urlprefix+s for s in values])]  # Find matching objects
             if len(items) != len(values):                                # Find them all?
                 _logger.info(
                     u'For type %s predicate %s linked to %d URIs, but only %d found',
@@ -185,7 +189,7 @@ class Ingestor(grok.Adapter):
             predicates = statements[uri]                                                     # Subject-specific preds
             objectUpdated = False                                                            # Assume no update
             iface, fti, predicateMap, title = self._checkPredicates(predicates)              # Get usual suspects
-            for predicate, (fieldName, isRef) in predicateMap.iteritems():                   # For each pred+field name
+            for predicate, (fieldName, isRef, urlprefix) in predicateMap.iteritems():                   # For each pred+field name
                 field = iface.get(fieldName)                                                 # Get the field
                 fieldBinding = field.bind(obj)                                               # Bind it to the obj
 
