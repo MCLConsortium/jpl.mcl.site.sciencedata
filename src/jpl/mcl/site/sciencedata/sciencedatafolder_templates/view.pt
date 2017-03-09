@@ -87,21 +87,21 @@
                                 </td>
                                 <td>
                                     <tal:repeat repeat='pi leadpi'>
-                                    <a href='#' tal:content='python:pi.givenName+" "+pi.surname' tal:attributes='href python:"/mcl/resources/people/"+pi.absolute_url_path()'>
+                                    <a href='#' tal:content='python:pi.givenName+" "+pi.surname' tal:attributes='href pi/absolute_url_path'>
                                         blublablurp pi
                                     </a>
                                     </tal:repeat>
                                 </td>
                                 <td>
                                     <tal:repeat repeat='inst institution'>
-                                    <a href='#' tal:content='inst/title' tal:attributes='href python:"/mcl/resources/institutions/"+inst.absolute_url_path()'>
+                                    <a href='#' tal:content='inst/title' tal:attributes='href inst/absolute_url_path'>
                                         blublablurp institution
                                     </a>
                                     </tal:repeat>
                                 </td>
                                 <td>
                                     <tal:repeat repeat='org organ'>
-                                    <a href='#' tal:content='org/title' tal:attributes='href python:"/mcl/resources/organs/"+org.absolute_url_path()'>
+                                    <a href='#' tal:content='org/title' tal:attributes='href org/absolute_url_path'>
                                         blublablurp org
                                     </a>
                                     </tal:repeat>
@@ -111,7 +111,7 @@
                                 </td>
                                 <td>
                                     <tal:repeat repeat='prot protocol'>
-                                    <a href='#' tal:content='prot/title' tal:attributes='href python:"/mcl/resources/protocols/"+prot.absolute_url_path()'>
+                                    <a href='#' tal:content='prot/title' tal:attributes='href prot/absolute_url_path'>
                                         blublablurp protocol
                                     </a>
                                     </tal:repeat>
