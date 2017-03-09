@@ -78,7 +78,6 @@
                                 tal:attributes='class python:u"odd" if odd else u"even"'
                                 tal:condition="isPublic">
                                 <td>
-                                NEWWW
                                     <a href='#' tal:attributes='href url' tal:content='row/Title'>
                                         Title
                                     </a>
