@@ -7,7 +7,7 @@ import os.path
 # ------------
 
 _name            = 'jpl.mcl.site.sciencedata'
-_version         = '0.0.3'
+_version         = '0.0.4'
 _description     = 'Science data for the MCL site'
 _url             = 'https://github.com/MCLConsortium/' + _name
 _downloadURL     = 'https://github.com/MCLConsortium/' + _name + '/archive/' + _version + '.zip'
@@ -28,18 +28,22 @@ _entryPoints = {
 }
 _requirements = [
     'setuptools',
+    'eea.facetednavigation',
+    'mysolr',
     'plone.api',
+    'plone.app.collection',
     'plone.app.dexterity [grok, relations]',
+    'plone.app.imaging',
     'plone.app.registry',
     'plone.app.relationfield',
     'plone.behavior',
     'plone.formwidget.contenttree',
+    'Products.Archetypes',
+    'Products.ATContentTypes',
     'Products.CMFPlacefulWorkflow',
     'Products.CMFPlone',
     'rdflib',
     'z3c.relationfield',
-    'mysolr',
-    'eea.facetednavigation'
 ]
 _classifiers = [
     'Development Status :: 2 - Pre-Alpha',

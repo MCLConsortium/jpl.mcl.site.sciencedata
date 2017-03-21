@@ -3,13 +3,27 @@ Changelog
 
 The following describes the changes between releases.
 
-0.0.2 — TBD
+
+0.0.4 — TBD
 -----------
+
+• CA-1509 - Traceback error on Contents button; upgrade to Plone 5.0.7
+
+
+0.0.3 — ???
+-----------
+
+• No idea what went into this release, but it's out on PyPI already.
+
+
+0.0.2 — LabCAS Text
+-------------------
 
 • Added text to describe labcas collection data
 
-0.0.1 — TBD
------------
+
+0.0.1 — Solr
+------------
 
 • Created types and Solr Json ingest for collection type data
 
