@@ -116,10 +116,6 @@ class Ingestor(grok.Adapter):
         field = iface.get(fieldName)                                     # Get the field out of the content interface
 
         fieldBinding = field.bind(obj)                                   # Bind that field to the content object
-        print "fieldname"
-        print fieldName
-        print "value"
-        print values
         if isRef:                                                        # Is this a reference field?
             items = [i.getObject() for i in catalog(subjectURI=[urlprefix+s for s in values])]  # Find matching objects
             if len(items) != len(values):                                # Find them all?
