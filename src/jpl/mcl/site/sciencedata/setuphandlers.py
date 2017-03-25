@@ -42,8 +42,8 @@ def createScienceDataFolders(setupTool):
     registry = getUtility(IRegistry)
 
     #Expose navigations types that this package creates and orders them
-    navigation_settings = registry.forInterface(INavigationSchema, prefix='plone')
-    navigation_settings.displayed_types = ('Folder', 'jpl.mcl.site.sciencedata.sciencedatafolder')
+    #navigation_settings = registry.forInterface(INavigationSchema, prefix='plone')
+    #navigation_settings.displayed_types = ('Folder', 'jpl.mcl.site.sciencedata.sciencedatafolder')
 
     registry['jpl.mcl.site.sciencedata.interfaces.ISettings.objects'] = [
         u'science-data'
