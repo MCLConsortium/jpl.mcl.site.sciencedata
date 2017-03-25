@@ -7,7 +7,6 @@ from plone.dexterity.utils import createContentInContainer
 from plone.registry.interfaces import IRegistry
 from ZODB.DemoStorage import DemoStorage
 from zope.component import getUtility
-from Products.CMFPlone.interfaces import INavigationSchema
 
 import socket, logging
 
@@ -40,10 +39,6 @@ def createScienceDataFolders(setupTool):
     )
     publish(sciencedata)
     registry = getUtility(IRegistry)
-
-    #Expose navigations types that this package creates and orders them
-    #navigation_settings = registry.forInterface(INavigationSchema, prefix='plone')
-    #navigation_settings.displayed_types = ('Folder', 'jpl.mcl.site.sciencedata.sciencedatafolder')
 
     registry['jpl.mcl.site.sciencedata.interfaces.ISettings.objects'] = [
         u'science-data'
