@@ -7,11 +7,7 @@
     metal:use-macro='context/main_template/macros/master'>
     <head>
         <title>Degree Folder View</title>
-        <metal:block fill-slot='style_slot' tal:define='navroot context/@@plone_portal_state/navigation_root_url'>
-            <link rel='stylesheet' type='text/css'
-                tal:attributes='href string:${navroot}/++resource++jpl.mcl.site.knowledge/custom-mcl.css'
-            />
-        </metal:block>
+        <metal:override fill-slot='top_slot' tal:define='dummy python:request.set("disable_plone.leftcolumn", 1)'/>
     </head>
     <body>
         <metal:content-core fill-slot='content-core'>
