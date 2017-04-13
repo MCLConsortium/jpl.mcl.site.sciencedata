@@ -11,7 +11,9 @@
     </head>
     <body>
         <metal:content-core fill-slot='content-core'>
-            <metal:content-core define-macro='content-core' tal:define='isManager view/isManager'>
+            <metal:content-core define-macro='content-core' tal:define='
+                username context/portal_membership/getAuthenticatedMember;
+                isManager view/isManager'>
                 <p tal:condition='isManager' class='discreet callout'>
                     <label for='form-widgets-url' class='horizontal' i18n:translate='rdfURL'>
                         Source URL(s):
@@ -40,8 +42,12 @@
                 </p>
                 <p>
                     The data collections is a comprehensive set of science data. Data related to pathology, including gross pathology, normal histology, and histopathology can be found within pathology data collections. Data related to images, CT, and dicom images can be found within image data collections. The integrated MCL knowledge base system allows the collections to be viewed, archived, and shared among collaborators. The pathology and image data is connected to related clinical data, imaging data, publications, and other useful resources.
-                </p>       
-                <table class='listing' summary='Listing of Degrees' i18n:attributes='summary'>
+                </p>
+                <p tal:condition='python:username.getUserName() == "Anonymous User"'>
+                    <center><font color='red' size=3>You must be logged in to see science data contents.</font></center>
+                </p>
+                <table class='listing' summary='Listing of Degrees' i18n:attributes='summary' 
+                    tal:condition='python:username.getUserName() != "Anonymous User"'>
                     <thead>
                         <tr>
                             <th i18n:translate='scienceFolder_titleHeading'>Collection Name</th>
@@ -71,8 +77,7 @@
                                     institution collection/institution;
                                     isPublic python:qastate=='Public';
                                 "
-                                tal:attributes='class python:u"odd" if odd else u"even"'
-                                tal:condition="isPublic">
+                                tal:attributes='class python:u"odd" if odd else u"even"'>
                                 <td>
                                     <a href='#' tal:attributes='href url' tal:content='row/Title'>
                                         Title
