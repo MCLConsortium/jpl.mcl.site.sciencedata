@@ -4,10 +4,12 @@ Changelog
 The following describes the changes between releases.
 
 
-0.0.4 — TBD
------------
+0.0.4 — Production ready Science Data
+-------------------------------------
 
 • CA-1509 - Traceback error on Contents button; upgrade to Plone 5.0.7
+• CA-1513 - Science data view is much thinner than members tab
+• CA-1488 - Link MCL to Labcas instead of labcas-dev
 
 
 0.0.3 — ???
