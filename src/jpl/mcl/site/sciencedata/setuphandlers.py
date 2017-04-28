@@ -21,7 +21,7 @@ if socket.gethostname() == 'tumor.jpl.nasa.gov' or socket.gethostname().endswith
     #temporarily using labcas production instead of development
     _labcasBaseURL = u'https://labcas.jpl.nasa.gov/ui/c/'
 else:
-    _solrBaseURL = u'https://labcas/solr/'
+    _solrBaseURL = u'https://labcas.jpl.nasa.gov/solr/'
     _labcasBaseURL = u'https://labcas.jpl.nasa.gov/ui/c/'
 
 
