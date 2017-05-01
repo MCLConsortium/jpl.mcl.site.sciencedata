@@ -4,6 +4,12 @@ Changelog
 The following describes the changes between releases.
 
 
+0.0.5 — TBD
+-----------
+
+• 
+
+
 0.0.4 — Production ready Science Data
 -------------------------------------
 
