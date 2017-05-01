@@ -16,7 +16,7 @@ _logger = logging.getLogger(__name__)
 # There has to be a better way of doing this:
 if socket.gethostname() == 'tumor.jpl.nasa.gov' or socket.gethostname().endswith('.local'):
     _logger.warn(u'Using development solr on labcas-dev instead of labcas production')
-    _solrBaseURL = u'http://localhost:8983/solr/'
+    _solrBaseURL = u'https://labcas-dev.jpl.nasa.gov/solr/'
     #_labcasBaseURL = u'https://labcas-dev.jpl.nasa.gov/ui/c/'
     #temporarily using labcas production instead of development
     _labcasBaseURL = u'https://labcas.jpl.nasa.gov/ui/c/'
