@@ -7,7 +7,7 @@ The following describes the changes between releases.
 0.0.5 — TBD
 -----------
 
-• 
+• CA-1520 - Ingest URLs incorrect
 
 
 0.0.4 — Production ready Science Data
