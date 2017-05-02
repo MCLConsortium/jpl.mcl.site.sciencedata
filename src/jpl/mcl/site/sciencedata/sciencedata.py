@@ -5,7 +5,12 @@ u'''MCL — Sciencedata'''
 from . import MESSAGE_FACTORY as _
 from zope import schema
 from ._base import IScienceDataObject
-from plone.formwidget.contenttree import ObjPathSourceBinder
+from plone.memoize import view
+import plone.api
+from Acquisition import aq_inner
+from five import grok
+#from plone.formwidget.contenttree import ObjPathSourceBinder
+from plone.app.vocabularies.catalog import CatalogSource
 from z3c.relationfield.schema import RelationChoice, RelationList
 from jpl.mcl.site.knowledge.protocol import IProtocol
 from jpl.mcl.site.knowledge.person import IPerson
@@ -43,7 +48,7 @@ class ISciencedata(IScienceDataObject):
         value_type=RelationChoice(
             title=_(u'Lead PI'),
             description=_(u'A individual lead pi in this data collection.'),
-            source=ObjPathSourceBinder(object_provides=IPerson.__identifier__)
+            source=CatalogSource(object_provides=IPerson.__identifier__)
         )
     )
     organ = RelationList(
@@ -54,7 +59,7 @@ class ISciencedata(IScienceDataObject):
         value_type=RelationChoice(
             title=_(u'Organ'),
             description=_(u'A individual organ associated with this data collection.'),
-            source=ObjPathSourceBinder(object_provides=IOrgan.__identifier__)
+            source=CatalogSource(object_provides=IOrgan.__identifier__)
         )
     )
     discipline = schema.TextLine(
@@ -70,7 +75,7 @@ class ISciencedata(IScienceDataObject):
         value_type=RelationChoice(
             title=_(u'Institution'),
             description=_(u'A individual institution in this data collection.'),
-            source=ObjPathSourceBinder(object_provides=IInstitution.__identifier__)
+            source=CatalogSource(object_provides=IInstitution.__identifier__)
         )
     )
     protocol = RelationList(
@@ -81,7 +86,7 @@ class ISciencedata(IScienceDataObject):
         value_type=RelationChoice(
             title=_(u'Protocol'),
             description=_(u'A individual protocol in this data collection.'),
-            source=ObjPathSourceBinder(object_provides=IProtocol.__identifier__)
+            source=CatalogSource(object_provides=IProtocol.__identifier__)
         )
     )
 
@@ -112,3 +117,12 @@ ISciencedata.setTaggedValue('predicateMap', {
 ISciencedata.setTaggedValue('fti', 'jpl.mcl.site.sciencedata.sciencedata')
 ISciencedata.setTaggedValue('typeValue', u'MCL')
 ISciencedata.setTaggedValue('typeKey', u'Consortium')
+
+class View(grok.View):
+    u'''View for a science data'''
+    grok.context(ISciencedata)
+    grok.require('zope2.View')
+    def contents(self):
+        context = aq_inner(self.context)
+        catalog = plone.api.portal.get_tool('portal_catalog')
+        return catalog(path={'query': '/'.join(context.getPhysicalPath()), 'depth': 0}, sort_on='sortable_title')
