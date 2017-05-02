@@ -58,7 +58,6 @@
                             <th i18n:translate='scienceFolder_organHeading'>Organ</th>
                             <th i18n:translate='scienceFolder_disciplineHeading'>Discipline</th>
                             <th i18n:translate='scienceFolder_protocolHeading'>Protocol</th>
-                            <th i18n:translate='scienceFolder_speciesHeading'>Species</th>
                             <th i18n:translate='scienceFolder_qaHeading'>QA State</th>
                         </tr>
                     </thead>
@@ -74,7 +73,6 @@
                                     discipline collection/discipline;
                                     protocol collection/protocol;
                                     qastate collection/qastate;
-                                    species collection/species;
                                     institution collection/institution;
                                     isPublic python:qastate=='Public';
                                 "
@@ -119,9 +117,6 @@
                                         blublablurp protocol
                                     </a>
                                     </tal:repeat>
-                                </td>
-                                <td tal:content='species'>
-                                    Alien
                                 </td>
                                 <td tal:content='qastate'>
                                     Out of this world
