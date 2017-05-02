@@ -8,6 +8,7 @@ The following describes the changes between releases.
 -----------
 
 • CA-1520 - Ingest URLs incorrect
+• CA-1523 - Create sciencedata view to in case user decides to search
 
 
 0.0.4 — Production ready Science Data
