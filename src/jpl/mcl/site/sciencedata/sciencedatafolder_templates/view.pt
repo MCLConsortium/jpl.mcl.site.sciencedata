@@ -88,7 +88,7 @@
                                 <td>
                                     <!-- The URLs are hardcoded because plone does not recognize absolute_url or absolute_url_path anymore. Will need to revisit this soon! -->
                                     <tal:repeat repeat='pi leadpi'>
-                                    <a href='#' tal:content='python:pi.givenName+" "+pi.surname' tal:attributes='href pi/absolute_url_path'>
+                                    <a href='#' tal:content='python:pi.givenName+" "+pi.surname' tal:attributes='href pi/absolute_url'>
                                         blublablurp pi
                                     </a>
                                     </tal:repeat>
@@ -113,7 +113,7 @@
                                 <td>
                                     <!-- The URLs are hardcoded because plone does not recognize absolute_url or absolute_url_path anymore. Will need to revisit this soon! -->
                                     <tal:repeat repeat='prot protocol'>
-                                    <a href='#' tal:content='prot/title' tal:attributes='href prot/absolute_url_path'>
+                                    <a href='#' tal:content='prot/title' tal:attributes='href prot/absolute_url'>
                                         blublablurp protocol
                                     </a>
                                     </tal:repeat>

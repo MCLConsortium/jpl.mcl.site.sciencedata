@@ -12,10 +12,7 @@ from five import grok
 #from plone.formwidget.contenttree import ObjPathSourceBinder
 from plone.app.vocabularies.catalog import CatalogSource
 from z3c.relationfield.schema import RelationChoice, RelationList
-from jpl.mcl.site.knowledge.protocol import IProtocol
-from jpl.mcl.site.knowledge.person import IPerson
-from jpl.mcl.site.knowledge.organ import IOrgan
-from jpl.mcl.site.knowledge.institution import IInstitution
+from jpl.mcl.site.knowledge.interfaces import IProtocol, IPerson, IOrgan, IOrgan, IInstitution
 
 
 class ISciencedata(IScienceDataObject):
