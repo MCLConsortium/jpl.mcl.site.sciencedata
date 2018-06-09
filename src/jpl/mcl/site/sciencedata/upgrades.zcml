@@ -5,7 +5,7 @@ RESERVED. U.S. Government Sponsorship acknowledged.
 -->
 <configure xmlns='http://namespaces.zope.org/zope' xmlns:genericsetup='http://namespaces.zope.org/genericsetup'
 i18n_domain='jpl.mcl.site.sciencedata'>
-<genericsetup:upgradeStep
+    <genericsetup:upgradeStep
         source='1'
         destination='2'
         title='MCL sciencedata Upgrade 1 to 32'
@@ -14,4 +14,13 @@ i18n_domain='jpl.mcl.site.sciencedata'>
         handler='jpl.mcl.site.sciencedata.upgrades.installSciencedataView'
         sortkey='1'
     />
-    </configure>
+    <genericsetup:upgradeStep
+        source='2'
+        destination='3'
+        title='MCL sciencedata Upgrade 1 to 32'
+        description='Upgrade the MCL jpl.mcl.site.sciencedata to update ingest url'
+        profile='jpl.mcl.site.sciencedata:default'
+        handler='jpl.mcl.site.sciencedata.upgrades.emptyfunc'
+        sortkey='1'
+    />
+</configure>

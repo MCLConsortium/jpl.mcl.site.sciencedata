@@ -17,3 +17,7 @@ def installSciencedataView(setupTool):
     request = portal.REQUEST
     sciencefolder = portal['science-data']
     setFacetedNavigation(sciencefolder, request, force=True)
+
+def emptyfunc(setupTool):
+    u'''Empty function'''
+    print("Upgraded")
