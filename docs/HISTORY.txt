@@ -4,6 +4,9 @@ Changelog
 The following describes the changes between releases.
 
 
+0.0.7 — Another Release?
+------------------------
+
 0.0.5 — TBD
 -----------
 
