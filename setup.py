@@ -29,6 +29,7 @@ _entryPoints = {
 _requirements = [
     'setuptools',
     'eea.facetednavigation',
+    'jpl.mcl.site.knowledge',
     'mysolr',
     'plone.api',
     'plone.app.collection',

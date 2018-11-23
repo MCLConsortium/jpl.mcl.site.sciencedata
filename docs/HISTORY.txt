@@ -4,8 +4,14 @@ Changelog
 The following describes the changes between releases.
 
 
+
+
 0.0.7 — Another Release?
 ------------------------
+
+• CA-1601: Science Data component fails to declare dependency on
+  Knowledge component
+
 
 0.0.5 — TBD
 -----------
