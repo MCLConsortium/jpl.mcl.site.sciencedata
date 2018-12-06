@@ -26,6 +26,16 @@ Currently this package supports the following languages:
 • English (US American)
 
 
+Developers
+----------
+
+Try this to avoid annoying buildout loops::
+
+    setuptools =
+
+That's it.  An empty ``setuptools =``.
+
+
 To Contribute
 -------------
 
